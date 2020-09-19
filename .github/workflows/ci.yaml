@@ -1,0 +1,34 @@
+# name of our workflow
+name: Django CI/CD Workflow
+
+# triggers for our workflow
+on:
+  # opening a pull request to master and develop branch will be a trigger
+  pull_request:
+    branches:
+      - develop
+      - master
+  # any code pushed to master and develop branch will also be a trigger
+  push:
+    branches:
+      - master
+      - develop
+
+# three job definition
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.7]
+    steps:
+    - uses: actions/checkout@v2  
+    - name: Python Linter
+      uses: sunnysid3up/python-linter@v0.1-beta.7
+      with:
+        source: "src"
+        mypy-options: "--ignore-missing-imports --show-error-codes"
+        pylint-options: "--rcfile=setup.cfg"
+        isort-options: "-w 100",
+        django: true
