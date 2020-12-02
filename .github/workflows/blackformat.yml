@@ -16,4 +16,4 @@ jobs:
       - name: Black Code Formatter Check
         uses: lgeiger/black-action@v1.0.1
         with:
-          args: "--check src"
+          args: "--check django-github-authentication tweet-from-django"
