@@ -1,0 +1,19 @@
+name: Black Code Formatter Check
+
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 14 * * 6'
+
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Black Code Formatter Check
+        uses: lgeiger/black-action@v1.0.1
+        with:
+          args: "--check src"
